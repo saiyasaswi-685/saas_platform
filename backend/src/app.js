@@ -11,12 +11,17 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
+app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/tenants', require('./routes/tenantRoutes'));
+app.use('/api', require('./routes/userRoutes'));
+app.use('/api/projects', require('./routes/projectRoutes'));
+app.use('/api', require('./routes/taskRoutes'));
+
 // We will add other routes here later
 
 // Health Check (Mandatory for Docker)
