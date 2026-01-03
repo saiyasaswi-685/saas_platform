@@ -5,7 +5,7 @@ VALUES
     '11111111-1111-1111-1111-111111111111',
     NULL,
     'superadmin@system.com',
-    '$2b$10$EpWxTiX.z.6d.DqN.DqN.DqN.DqN.DqN.DqN.DqN', -- Hash for 'Admin@123' (Conceptual placeholder)
+    '$2b$10$n7f3kP8FMbDMpewnNDFIA.sQNLSwt8jSngQ/1A/lce7FKKVH405Ve', -- Hash for 'Admin@123' (Conceptual placeholder)
     'System Super Admin',
     'super_admin',
     true
@@ -31,7 +31,7 @@ VALUES
     '33333333-3333-3333-3333-333333333333',
     '22222222-2222-2222-2222-222222222222', -- Links to Demo Tenant
     'admin@demo.com',
-    '$2b$10$EpWxTiX.z.6d.DqN.DqN.DqN.DqN.DqN.DqN.DqN', -- Hash for 'Demo@123' (Conceptual placeholder)
+    '$2b$10$n7f3kP8FMbDMpewnNDFIA.sQNLSwt8jSngQ/1A/lce7FKKVH405Ve', -- Hash for 'Demo@123' (Conceptual placeholder)
     'Demo Admin',
     'tenant_admin',
     true

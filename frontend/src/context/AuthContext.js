@@ -19,7 +19,18 @@ export const AuthProvider = ({ children }) => {
         } else {
           // Fetch full user details
           api.get('/auth/me')
-            .then(res => setUser(res.data.data))
+            .then(res => {
+               // --- THE FIX IS HERE ---
+               const userData = res.data.data;
+               
+               // We ensure 'tenantId' is always at the top level.
+               // If the backend gives us a nested 'tenant' object, we grab the ID from it.
+               setUser({
+                 ...userData,
+                 tenantId: userData.tenant?.id || userData.tenantId
+               });
+               // -----------------------
+            })
             .catch(() => logout())
             .finally(() => setLoading(false));
         }
@@ -38,7 +49,8 @@ export const AuthProvider = ({ children }) => {
       const newToken = res.data.data.token;
       localStorage.setItem('token', newToken);
       setToken(newToken);
-      setUser(res.data.data.user);
+      // Login API usually sends tenantId correctly, but this keeps it consistent
+      setUser(res.data.data.user); 
       return { success: true };
     } catch (error) {
       return { success: false, message: error.response?.data?.message || 'Login failed' };

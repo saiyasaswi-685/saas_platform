@@ -223,3 +223,32 @@ exports.deleteProject = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+// --- ADD THIS FUNCTION ---
+exports.getProject = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    
+    // Check if project exists and belongs to tenant
+    // We also check if the user has access (for now, tenant-wide access is assumed)
+    const projectRes = await db.query(
+      `SELECT * FROM projects WHERE id = $1 AND tenant_id = $2`,
+      [projectId, req.user.tenantId]
+    );
+
+    if (projectRes.rows.length === 0) {
+      return res.status(404).json({ success: false, message: 'Project not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        projects: [projectRes.rows[0]] // Sending as array to match your frontend logic
+      }
+    });
+
+  } catch (error) {
+    console.error('Error fetching project:', error);
+    res.status(500).json({ success: false, message: 'Server error fetching project' });
+  }
+};

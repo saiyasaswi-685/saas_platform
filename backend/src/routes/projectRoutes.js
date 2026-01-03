@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { createProject, listProjects, updateProject, deleteProject } = require('../controllers/projectController');
+// ADDED 'getProject' to the imports below
+const { createProject, listProjects, updateProject, deleteProject, getProject } = require('../controllers/projectController');
 const { verifyToken } = require('../middleware/authMiddleware');
 const { check } = require('express-validator');
 
@@ -11,8 +12,12 @@ router.post('/',
     createProject
 );
 
-// List
+// List (Get All)
 router.get('/', verifyToken, listProjects);
+
+// --- THIS WAS MISSING: Get Single Project ---
+router.get('/:projectId', verifyToken, getProject);
+// --------------------------------------------
 
 // Update
 router.put('/:projectId', verifyToken, updateProject);
