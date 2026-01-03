@@ -38,7 +38,7 @@ The application follows a standard MVC architecture with tenant isolation at the
 ### Quick Start (Docker)
 1.  **Clone the repository:**
     ```bash
-    git clone <YOUR_REPO_URL>
+    git clone https://github.com/saiyasaswi-685/saas_platform
     cd saas-platform
     ```
 
